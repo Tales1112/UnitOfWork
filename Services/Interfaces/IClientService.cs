@@ -8,8 +8,8 @@ namespace Unity_Of_Work
     {
         Task<Notificator> CreateClient(ClientViewModel clientViewModel);
         Task<Notificator> RemoveClient(ClientViewModel clientViewModel);
-        Task<bool> UpdateCliente(ClientViewModel clientViewModel);
-        Task<IEnumerable<Client>> GetAllClients();
-        Task<Client> GetClientById(int id);
+        Task<Notificator> UpdateCliente(ClientViewModel clientViewModel);
+        Task<Notificator> GetAllClients();
+        Task<Notificator> GetClientById(int id);
     }
 }

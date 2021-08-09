@@ -11,8 +11,17 @@ namespace Unity_Of_Work.Validators
             CascadeMode = CascadeMode.Stop;
 
             RuleFor(n => n.Nome)
-                .NotNull().WithErrorCode(UnityOfWorkErrors.Client_AdicionarCliente_Post_400_Invalid_Name.ToString())
-                .NotEmpty().WithErrorCode(UnityOfWorkErrors.Client_AdicionarCliente_Post_400_Invalid_Name.ToString());
+                .NotNull().WithErrorCode(UnityOfWorkErrors.Client_400_Invalid_Name.ToString())
+                .NotEmpty().WithErrorCode(UnityOfWorkErrors.Client_400_Invalid_Name.ToString());
+
+            RuleFor(n => n.Email)
+                .NotNull().WithErrorCode(UnityOfWorkErrors.Client_400_Invalid_Email.ToString())
+                .NotNull().WithErrorCode(UnityOfWorkErrors.Client_400_Invalid_Email.ToString())
+                .EmailAddress().WithErrorCode(UnityOfWorkErrors.Client_400_Invalid_Email.ToString());
+
+            RuleFor(n => n.Cpf)
+                .NotNull().WithErrorCode(UnityOfWorkErrors.Client_400_Invalid_CPF.ToString())
+                .NotEmpty().WithErrorCode(UnityOfWorkErrors.Client_400_Invalid_CPF.ToString());
         }
     }
 }

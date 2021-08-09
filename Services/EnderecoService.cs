@@ -4,60 +4,67 @@ using Unity_Of_Work.Models;
 using Unity_Of_Work.Repositories.Interfaces;
 using Unity_Of_Work.Validators;
 
-namespace Unity_Of_Work
+namespace Unity_Of_Work.Services
 {
-    public class ClientService : IClientService
+    public class EnderecoService : IEnderecoService
     {
         private readonly IUnitOfWork _uow;
-
-        public ClientService(IUnitOfWork uow)
+        public EnderecoService(IUnitOfWork uow)
         {
             _uow = uow;
         }
-
-        public Task<Notificator> CreateClient(ClientViewModel clientViewModel)
+        public Task<Notificator> AddEndereco(EnderecoViewModel enderecoViewModel)
         {
-            var validator = new ClientViewModelValidator().Validate(clientViewModel);
+            var validator = new EnderecoViewModelValidator().Validate(enderecoViewModel);
             if (!validator.IsValid)
                 return Task.FromResult(Notificator.NorOk(validator.Errors[0].ToString(), HttpStatusCode.BadRequest));
 
-            _uow.ClientRepository.Add(new Client(clientViewModel));
+            _uow.EnderecoRepository.Add(new Endereco(enderecoViewModel));
             _uow.Commit();
 
             return Task.FromResult(Notificator.OK("Cliente cadastrado com sucesso"));
         }
-        public Task<Notificator> RemoveClient(ClientViewModel clientViewModel)
+        public Task<Notificator> RemoveEndereco(EnderecoViewModel clientViewModel)
         {
-            var validator = new ClientViewModelValidator().Validate(clientViewModel);
+            var validator = new EnderecoViewModelValidator().Validate(clientViewModel);
             if (!validator.IsValid)
                 return Task.FromResult(Notificator.NorOk(validator.Errors[0].ToString(), HttpStatusCode.BadRequest));
 
-            _uow.ClientRepository.Delete(new Client(clientViewModel));
+            _uow.EnderecoRepository.Delete(new Endereco(clientViewModel));
             _uow.Commit();
             return Task.FromResult(Notificator.OK("Cliente removido com Sucesso"));
         }
-        public Task<Notificator> UpdateCliente(ClientViewModel clientViewModel)
+        public Task<Notificator> UpdateEndereco(EnderecoViewModel enderecoViewModel)
         {
-            var validator = new ClientViewModelValidator().Validate(clientViewModel);
+            var validator = new EnderecoViewModelValidator().Validate(enderecoViewModel);
             if (!validator.IsValid)
                 return Task.FromResult(Notificator.NorOk(validator.Errors[0].ToString(), HttpStatusCode.BadRequest));
 
-            _uow.ClientRepository.Update(new Client(clientViewModel));
+            _uow.EnderecoRepository.Update(new Endereco(enderecoViewModel));
             _uow.Commit();
             return Task.FromResult(Notificator.OK("Cliente atualizado com Sucesso"));
         }
-        public Task<Notificator> GetAllClients()
+        public Task<Notificator> GetAllEnderecos()
         {
-            var result = _uow.ClientRepository.Get();
+            var result = _uow.EnderecoRepository.Get();
 
             if (result == null)
                 return Task.FromResult(Notificator.NorOk("Clientes não encontrado nada base", HttpStatusCode.BadRequest));
 
             return Task.FromResult(Notificator.OK(result));
         }
-        public Task<Notificator> GetClientById(int id)
+        public Task<Notificator> GetEnderecoById(int id)
         {
-            var result = _uow.ClientRepository.GetById(c => c.ClientId == id);
+            var result = _uow.EnderecoRepository.GetById(c => c.EnderecoId == id);
+            if (result == null)
+                return Task.FromResult(Notificator.NorOk("Cliente não encontrado", HttpStatusCode.BadRequest));
+
+            return Task.FromResult(Notificator.OK(result));
+        }
+        public Task<Notificator> GetEnderecoByClient(int clientId)
+        {
+            var result = _uow.EnderecoRepository.GetById(c => c.ID_CLIENTE == clientId);
+
             if (result == null)
                 return Task.FromResult(Notificator.NorOk("Cliente não encontrado", HttpStatusCode.BadRequest));
 

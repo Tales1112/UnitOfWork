@@ -41,13 +41,13 @@ namespace Unity_Of_Work.Controllers
         public async Task<IActionResult> GetClienteById([FromQuery] int id)
         {
             var result = await _clientService.GetClientById(id);
-            return Ok(result);
+            return CustomResponse(result);
         }
         [HttpGet]
         public async Task<IActionResult> GetAllClientes()
         {
             var result = await _clientService.GetAllClients();
-            return Ok(result);
+            return CustomResponse(result);
         }
     }
 }
