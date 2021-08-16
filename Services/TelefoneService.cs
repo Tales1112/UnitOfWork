@@ -6,7 +6,7 @@ using Unity_Of_Work.Validators;
 
 namespace Unity_Of_Work.Services
 {
-    public class TelefoneService
+    public class TelefoneService : ITelefoneService
     {
         private readonly IUnitOfWork _uow;
         public TelefoneService(IUnitOfWork uow)
@@ -26,7 +26,7 @@ namespace Unity_Of_Work.Services
 
             return Task.FromResult(Notificator.OK("Telefone cadastrado com sucesso"));
         }
-        public Task<Notificator> RemoveEndereco(TelefoneViewModel telefoneViewModel)
+        public Task<Notificator> RemoveTelefone(TelefoneViewModel telefoneViewModel)
         {
             var validator = new TelefoneViewModelValidator().Validate(telefoneViewModel);
             if (!validator.IsValid)
@@ -36,7 +36,7 @@ namespace Unity_Of_Work.Services
             _uow.Commit();
             return Task.FromResult(Notificator.OK("Cliente removido com Sucesso"));
         }
-        public Task<Notificator> UpdateEndereco(TelefoneViewModel telefoneViewModel)
+        public Task<Notificator> UpdateTelefone(TelefoneViewModel telefoneViewModel)
         {
             var validator = new TelefoneViewModelValidator().Validate(telefoneViewModel);
             if (!validator.IsValid)
@@ -46,7 +46,7 @@ namespace Unity_Of_Work.Services
             _uow.Commit();
             return Task.FromResult(Notificator.OK("Cliente atualizado com Sucesso"));
         }
-        public Task<Notificator> GetAllEnderecos()
+        public Task<Notificator> GetAllTelefones()
         {
             var result = _uow.EnderecoRepository.Get();
 
@@ -55,7 +55,7 @@ namespace Unity_Of_Work.Services
 
             return Task.FromResult(Notificator.OK(result));
         }
-        public Task<Notificator> GetEnderecoById(int id)
+        public Task<Notificator> GetTelefoneById(int id)
         {
             var result = _uow.EnderecoRepository.GetById(c => c.EnderecoId == id);
             if (result == null)
@@ -63,7 +63,7 @@ namespace Unity_Of_Work.Services
 
             return Task.FromResult(Notificator.OK(result));
         }
-        public Task<Notificator> GetEnderecoByClient(int clientId)
+        public Task<Notificator> GetTelefoneByClient(int clientId)
         {
             var result = _uow.EnderecoRepository.GetById(c => c.ID_CLIENTE == clientId);
 

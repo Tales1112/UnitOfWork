@@ -1,12 +1,12 @@
-﻿using Unity_Of_Work.Models;
+﻿using Unity_Of_Work.Repositories.Repositories;
 
 namespace Unity_Of_Work.Repositories.Interfaces
 {
     public interface IUnitOfWork
     {
-        IRepository<Client> ClientRepository { get; }
-        IRepository<Endereco> EnderecoRepository { get; }
-        IRepository<Telefone> TelefoneRepository { get; }
+        IClientRepository ClientRepository { get; }
+        IEnderecoRepository EnderecoRepository { get; }
+        ITelefoneRepository TelefoneRepository { get; }
         void Commit();
     }
 }

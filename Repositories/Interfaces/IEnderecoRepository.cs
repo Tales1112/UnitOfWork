@@ -2,7 +2,5 @@
 
 namespace Unity_Of_Work.Repositories.Interfaces
 {
-    public interface IEnderecoRepository : IRepository<Endereco>
-    {
-    }
+    public interface IEnderecoRepository : IRepository<Endereco> { }
 }

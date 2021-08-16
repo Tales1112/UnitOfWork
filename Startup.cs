@@ -9,6 +9,7 @@ using System;
 using Unity_Of_Work.Repositories;
 using Unity_Of_Work.Repositories.Interfaces;
 using Unity_Of_Work.Repositories.Repositories;
+using Unity_Of_Work.Services;
 
 namespace Unity_Of_Work
 {
@@ -24,13 +25,16 @@ namespace Unity_Of_Work
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(5,7,35))));
+            options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(5, 7, 35))));
             services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IEnderecoService, EnderecoService>();
+            services.AddScoped<IEnderecoRepository, EnderecoRepository>();
             services.AddScoped<IUnitOfWork, UnityOfWork>();
             services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<ITelefoneService, TelefoneService>();
+            services.AddScoped<ITelefoneRepository, TelefoneRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Unity_Of_Work", Version = "v1" });

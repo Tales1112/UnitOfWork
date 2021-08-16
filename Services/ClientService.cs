@@ -63,5 +63,13 @@ namespace Unity_Of_Work
 
             return Task.FromResult(Notificator.OK(result));
         }
+        public Task<Notificator> GetClientsByName(string nome)
+        {
+            var result = _uow.ClientRepository.GetClientByName(x => x.Nome == nome);
+            if (result == null)
+                return Task.FromResult(Notificator.NorOk("Cliente não encontrado", HttpStatusCode.BadRequest));
+
+            return Task.FromResult(Notificator.OK(result));
+        }
     }
 }

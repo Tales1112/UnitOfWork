@@ -19,7 +19,7 @@ namespace Unity_Of_Work.Controllers
         /// <param name="clientViewModel"></param>
         /// <returns>retorna true or false</returns>
         [HttpPost]
-        public async Task<IActionResult> AdicionarClient([FromBody]ClientViewModel clientViewModel)
+        public async Task<IActionResult> AdicionarClient([FromBody] ClientViewModel clientViewModel)
         {
             var result = await _clientService.CreateClient(clientViewModel);
             return CustomResponse(result);
@@ -41,6 +41,12 @@ namespace Unity_Of_Work.Controllers
         public async Task<IActionResult> GetClienteById([FromQuery] int id)
         {
             var result = await _clientService.GetClientById(id);
+            return CustomResponse(result);
+        }
+        [HttpGet("GetByName")]
+        public async Task<IActionResult> GetClienteByName([FromQuery] string nome)
+        {
+            var result = await _clientService.GetClientByName(nome);
             return CustomResponse(result);
         }
         [HttpGet]

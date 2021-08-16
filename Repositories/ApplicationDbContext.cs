@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Unity_Of_Work.Models;
 
 namespace Unity_Of_Work.Repositories
 {
@@ -7,8 +6,5 @@ namespace Unity_Of_Work.Repositories
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public ApplicationDbContext() { }
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<Endereco> Endereco { get; set; }
-        public DbSet<Telefone> Telefones { get; set; }
     }
 }
