@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Unity_Of_Work.Extensions;
 using Unity_Of_Work.Models;
 using Unity_Of_Work.Services.Errors;
 
@@ -21,6 +22,7 @@ namespace Unity_Of_Work.Validators
 
             RuleFor(n => n.Cpf)
                 .NotNull().WithErrorCode(UnityOfWorkErrors.Client_400_Invalid_CPF.ToString())
+                .Must(x => x.IsCpf()).WithErrorCode(UnityOfWorkErrors.Client_400_Invalid_CPF.ToString())
                 .NotEmpty().WithErrorCode(UnityOfWorkErrors.Client_400_Invalid_CPF.ToString());
         }
     }

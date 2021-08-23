@@ -16,23 +16,23 @@ namespace Unity_Of_Work.Repositories.Repositories
             var result = await _context.Set<T>().AddAsync(entity);
             return result.Entity;
         }
-        public void Delete(T entity)
+        public virtual void Delete(T entity)
         {
-            _context.Set<T>().Remove(entity);
+            _context.Set<T>().Remove(entity);  
         }
-        public IEnumerable<T> Get()
+        public virtual IEnumerable<T> Get()
         {
             return _context.Set<T>().AsEnumerable();
         }
-        public IEnumerable<T> Get(Expression<Func<T, bool>> predicate)
+        public virtual IEnumerable<T> Get(Expression<Func<T, bool>> predicate)
         {
             return _context.Set<T>().Where(predicate).AsEnumerable();
         }
-        public T GetById(Expression<Func<T, bool>> predicate)
+        public virtual T GetById(Expression<Func<T, bool>> predicate)
         {
             return _context.Set<T>().FirstOrDefault(predicate);
         }
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             _context.Set<T>().Update(entity);
         }

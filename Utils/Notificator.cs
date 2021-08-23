@@ -6,7 +6,7 @@ namespace Unity_Of_Work.Models
 {
     public class Notificator
     {
-        public ICollection<string> Errors = new List<string>();
+        public List<string> Errors = new List<string>();
         public bool Success { get; set; }
         public HttpStatusCode StatusCode { get; set; }
         public object Data { get; set; }

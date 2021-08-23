@@ -5,10 +5,10 @@ namespace Unity_Of_Work.Repositories.Repositories
 {
     public class UnityOfWork : IUnitOfWork, IDisposable
     {
-        public ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         public IClientRepository ClientRepository { get; set; }
         public IEnderecoRepository EnderecoRepository { get; set; }
-        public ITelefoneRepository TelefoneRepository { get; set; }
+        public ITelefoneRepository TelefoneRepository { get; }
         public UnityOfWork(ApplicationDbContext context, IClientRepository clientRepository,
              IEnderecoRepository enderecoRepository, ITelefoneRepository telefoneRepository)
         {

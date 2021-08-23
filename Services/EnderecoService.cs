@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Unity_Of_Work.Models;
 using Unity_Of_Work.Repositories.Interfaces;
@@ -48,7 +49,7 @@ namespace Unity_Of_Work.Services
         {
             var result = _uow.EnderecoRepository.Get();
 
-            if (result == null)
+            if (!result.Any() || result.FirstOrDefault() is null)
                 return Task.FromResult(Notificator.NorOk("Clientes não encontrado nada base", HttpStatusCode.BadRequest));
 
             return Task.FromResult(Notificator.OK(result));
