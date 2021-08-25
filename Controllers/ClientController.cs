@@ -28,14 +28,14 @@ namespace Unity_Of_Work.Controllers
         public async Task<IActionResult> RemoverCliente(ClientViewModel clientViewModel)
         {
             var result = await _clientService.RemoveClient(clientViewModel);
-            return Ok(result);
+            return CustomResponse(result);
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateCliente(ClientViewModel clientViewModel)
         {
             var result = await _clientService.UpdateCliente(clientViewModel);
-            return Ok(result);
+            return CustomResponse(result);
         }
         [HttpGet("GetById")]
         public async Task<IActionResult> GetClienteById([FromQuery] int id)

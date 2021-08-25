@@ -8,7 +8,7 @@ using Unity_Of_Work.Models;
 namespace Unity_Of_Work.Controllers
 {
     [ApiController]
-    public abstract class MainController : Controller
+    public abstract class MainController : ControllerBase
     {
         protected ICollection<string> Erros = new List<string>();
         public MainController() { }
